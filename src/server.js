@@ -14,3 +14,7 @@ app.use('/storage', require('./routes/storage'));
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+
+
+// git remote set-url origin https://manu800:<YOUR_TOKEN>@github.com/manu800/test.git

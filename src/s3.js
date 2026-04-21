@@ -7,14 +7,20 @@ const {
 } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
-const client = new S3Client({
+const clientConfig = {
   region: process.env.AWS_REGION,
-  credentials: {
+  followRegionRedirects: true,
+};
+
+// Use explicit credentials when provided (local dev / non-EC2); otherwise rely on instance role
+if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+  clientConfig.credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-  followRegionRedirects: true,
-});
+  };
+}
+
+const client = new S3Client(clientConfig);
 
 const Bucket = () => process.env.AWS_S3_BUCKET;
 
