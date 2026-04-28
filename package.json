@@ -16,7 +16,8 @@
     "@aws-sdk/s3-request-presigner": "^3.1033.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "multer": "^2.1.1"
+    "multer": "^2.1.1",
+    "redis": "^5.12.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
