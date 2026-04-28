@@ -10,9 +10,12 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/items', require('./routes/items'));
 app.use('/storage', require('./routes/storage'));
-
+app.use('/cache', require('./routes/cache'));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+
+
+// git remote set-url origin https://manu800:<YOUR_TOKEN>@github.com/manu800/test.git

@@ -1,0 +1,43 @@
+# Pull latest code
+git pull
+
+# Rebuild image
+docker build -t my-node-app .
+
+# Remove old container
+docker stop my-app && docker rm my-app
+
+# Run new container
+docker run -d --name my-app -p 3000:3000 --env-file .env --restart unless-stopped my-node-app
+
+
+
+
+
+
+
+
+
+# Stop the container
+docker stop my-app && docker rm my-app
+
+# Go to your app folder
+cd /home/ubuntu/test
+
+# Start with PM2 (reads .env via dotenv in the code)
+pm2 start src/server.js --name my-app
+
+# Save so it auto-starts on server reboot
+pm2 save
+pm2 startup
+
+
+Use PM2 if you just want to run a Node.js app simply and quickly.
+
+Use Docker if you want to ship the same code to any server without worrying about Node version, dependencies, or OS differences.
+
+For your current project, PM2 is simpler. Docker becomes useful when you scale or deploy to multiple servers.
+
+
+
+docker run -d --name my-app -p 3000:3000 --env-file .env --restart always my-node-app
