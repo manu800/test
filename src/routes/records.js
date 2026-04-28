@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   if (!title) return res.status(400).json({ error: 'title is required' });
   const result = await pool.query(
     'INSERT INTO records (title, data) VALUES ($1, $2) RETURNING *',
-    [title, data || null]
+    [title, data ? JSON.stringify(data) : null]
   );
   res.status(201).json(result.rows[0]);
 });
@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
   const { title, data } = req.body;
   const result = await pool.query(
     'UPDATE records SET title = COALESCE($1, title), data = COALESCE($2, data), updated_at = NOW() WHERE id = $3 RETURNING *',
-    [title || null, data || null, req.params.id]
+    [title || null, data ? JSON.stringify(data) : null, req.params.id]
   );
   if (!result.rows.length) return res.status(404).json({ error: 'Not found' });
   res.json(result.rows[0]);
