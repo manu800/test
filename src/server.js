@@ -11,6 +11,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 app.use('/items', require('./routes/items'));
 app.use('/storage', require('./routes/storage'));
 app.use('/cache', require('./routes/cache'));
+app.use('/records', require('./routes/records'));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
